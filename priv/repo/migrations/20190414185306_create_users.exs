@@ -13,7 +13,7 @@ defmodule MyTwitter.Repo.Migrations.CreateUsers do
       add :url, :string
       add :followers_count, :integer
       add :favourites_count, :integer
-      add :created_at :string
+      add :created_at, :string
 
       timestamps()
     end
