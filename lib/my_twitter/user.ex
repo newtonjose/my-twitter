@@ -36,7 +36,7 @@ defmodule MyTwitter.User do
 
   def changeset(%__MODULE__{} = user, attrs) do
     user
-    |> cast(attrs, [:screen_name, :name, :email, :description, :locarion,
+    |> cast(attrs, [:screen_name, :name, :email, :description, :location,
       :protected, :url, :followers_count, :favourites_count, :password])
     |> validate_required([:screen_name, :email, :password])
     |> validate_format(:email, ~r/@/)
