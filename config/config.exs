@@ -14,7 +14,7 @@ config :my_twitter,
 config :my_twitter, MyTwitterWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "WFd2BwQZyj2hO7dt7yFHYunWitbwQEP28rG5/mqJ50bafE40+LQk/oqKXxHgdzD5",
-  render_errors: [view: MyTwitterWeb.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: MyTwitterWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: MyTwitter.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "PaGUNkHI"]
 
@@ -22,6 +22,10 @@ config :my_twitter, MyTwitterWeb.Endpoint,
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+config :my_twitter, MyTwitter.Guardian,
+  issuer: "my_twitter",
+  secret_key: "3TrEVHPaCT1PIToFKDBh4Lh4jLwwM75BjpwjueKQw66CtaHVhpqC0pS0U9gmpk5Z"
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

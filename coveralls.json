@@ -1,0 +1,3 @@
+{
+  "skip_files": ["lib/my_twitter/demo_manager.ex", "test/"]
+}

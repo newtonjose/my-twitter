@@ -4,7 +4,7 @@ use Mix.Config
 config :my_twitter, MyTwitter.Repo,
   username: "postgres",
   password: "postgres",
-  database: "my_twitter_dev",
+  database: "twitter_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

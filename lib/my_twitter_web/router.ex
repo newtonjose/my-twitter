@@ -1,26 +1,16 @@
 defmodule MyTwitterWeb.Router do
-  use MyTwitterWeb, :router
-
-  pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-  end
+  use Phoenix.Router
 
   pipeline :api do
+    plug MyTwitterWeb.Context
     plug :accepts, ["json"]
   end
 
-  scope "/", MyTwitterWeb do
-    pipe_through :browser
+  scope "/" do
+    pipe_through :api
 
-    get "/", PageController, :index
+    forward "/v1/graphiql", Absinthe.Plug.GraphiQL, schema: MyTwitterWeb.Schema
+
+    forward "/", Absinthe.Plug, schema: MyTwitterWeb.Schema
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", MyTwitterWeb do
-  #   pipe_through :api
-  # end
 end

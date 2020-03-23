@@ -11,7 +11,11 @@ defmodule MyTwitter.Application do
       # Start the Ecto repository
       MyTwitter.Repo,
       # Start the endpoint when the application starts
-      MyTwitterWeb.Endpoint
+      MyTwitterWeb.Endpoint,
+      # Start Absinthe subscriptions
+      {Absinthe.Subscription, [MyTwitterWeb.Endpoint]},
+      # Run scheduled tasks
+      MyTwitter.Scheduler
       # Starts a worker by calling: MyTwitter.Worker.start_link(arg)
       # {MyTwitter.Worker, arg},
     ]

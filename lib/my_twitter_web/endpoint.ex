@@ -1,47 +1,33 @@
 defmodule MyTwitterWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :my_twitter
+  use Absinthe.Phoenix.Endpoint
+  use NewRelic.Transaction
 
-  # The session will be stored in the cookie and signed,
-  # this means its contents can be read but not tampered with.
-  # Set :encryption_salt if you would also like to encrypt it.
-  @session_options [
-    store: :cookie,
-    key: "_my_twitter_key",
-    signing_salt: "7LuFStSc"
-  ]
+  origin =
+    case Mix.env() do
+      :prod -> ["https://my_twitter-demo.herokuapp.com"]
+      _ -> false
+    end
 
-  socket "/socket", MyTwitterWeb.UserSocket,
-    websocket: true,
-    longpoll: false
-
-  # Serve at "/" the static files from "priv/static" directory.
-  #
-  # You should set gzip to true if you are running phx.digest
-  # when deploying your static files in production.
-  plug Plug.Static,
-    at: "/",
-    from: :my_twitter,
-    gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+  socket "/socket", MyTwitterWeb.AbsintheSocket,
+    websocket: [check_origin: origin],
+    longpoll: true
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
-    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
-    plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
 
   plug Plug.RequestId
-  plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
+  plug Plug.Logger
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
-  plug Plug.MethodOverride
-  plug Plug.Head
-  plug Plug.Session, @session_options
+  plug CORSPlug
+
   plug MyTwitterWeb.Router
 end

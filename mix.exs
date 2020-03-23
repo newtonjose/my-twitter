@@ -10,7 +10,9 @@ defmodule MyTwitter.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.html": :test]
     ]
   end
 
@@ -33,16 +35,31 @@ defmodule MyTwitter.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.16"},
+      {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.1"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:cors_plug, "~> 2.0"},
+      {:bcrypt_elixir, "~> 2.0"},
+      {:guardian, "~> 1.0"},
+      {:absinthe, "~> 1.4"},
+      {:absinthe_phoenix, "~> 1.4.0"},
+      {:absinthe_plug, "~> 1.4"},
+      {:dataloader, "~> 1.0.0"},
+      {:poison, "~> 2.1.0"},
+      {:quantum, "~> 2.3"},
+      {:timex, "~> 3.0"},
+      {:new_relic_agent, "~> 1.0"},
+      {:new_relic_absinthe, "~> 0.0.2"},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:ex_machina, "~> 2.3", only: :test},
+      {:ex_spec, "~> 2.0", only: :test},
+      {:faker, "~> 0.7", only: :test},
+      {:junit_formatter, "~> 3.0", only: [:test]}
     ]
   end
 
