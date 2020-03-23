@@ -40,3 +40,6 @@ my_twitter-*.tar
 
 # html files
 /client
+
+# Ide files
+.vscode
