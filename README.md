@@ -2,7 +2,28 @@
 A simple Twitter API using Elixir, GraphQL and frontend by React &amp; Apollo GraphQL
 
 
-# Createing new type
+### DB Schemas
+
+- User
+
+```shell
+mix phx.gen.schema User users \
+    name:string \
+    email:strig \
+    screen_name:string \
+    description:string \
+    location:string \
+    url:string \
+    protected:boolean \
+    followers_count:integer \
+    favourites_count:integer \
+    created_at:string \
+    password_hash:string
+```
+
+```shell
+mix ecto.migrate
+```
 
 <!-- Criar um schema links: url:string description:text -->
 mix phx.gen.context News Link links url:string description:text
@@ -22,18 +43,4 @@ mix phx.gen.context Tweets Tweet tweets \
     favorited:boolean \
     retweeted:boolean \
     user:User
-```
-
-// Entidade User
-```shell
-mix phx.gen.context Users User users \
-    name:string \
-    screen_name:string \
-    location:string \
-    url:string \
-    description:string \
-    protected:boolean \
-    followers_count:integer \
-    favourites_count:integer \
-    created_at:string
 ```
