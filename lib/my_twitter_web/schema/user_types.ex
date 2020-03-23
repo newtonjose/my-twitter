@@ -26,7 +26,7 @@ defmodule MyTwitterWeb.Schema.UserTypes do
       end)
     end
 
-    field :posts, list_of(:post), resolve: dataloader(Data)
+    field :tweets, list_of(:tweet), resolve: dataloader(Data)
   end
 
   object :user_queries do
