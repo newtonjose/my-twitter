@@ -1,12 +1,19 @@
 # my-twitter
-A simple Twitter API using Elixir, GraphQL and frontend by React &amp; Apollo GraphQL
+A simple GraphQL API implementing the objects
+[User](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object), 
+[Tweet](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object) using the Twitter API as docs ref.
 
+## Instalation
+// Setup using docker-compose to get backend and front
 
-### DB Schemas
+## GraphQL Exemples
+// queries, mutations: create, update, delete
+
+## DB Schemas (docs)
 
 - User
 
-```shell
+```bash
 mix phx.gen.schema User users \
     name:string \
     email:strig \
@@ -21,26 +28,23 @@ mix phx.gen.schema User users \
     password_hash:string
 ```
 
-```shell
-mix ecto.migrate
-```
+- Tweet
 
-<!-- Criar um schema links: url:string description:text -->
-mix phx.gen.context News Link links url:string description:text
-
-// Entidade Tweet
-```shell
-mix phx.gen.context Tweets Tweet tweets \
-    created_at:string \
+```bash
+mix phx.gen.schema Tweet tweets \
     text:text \
-    truncated:boolean \
-    in_reply_to_status_id:integer \
-    in_reply_to_user_id:integer \
-    in_reply_to_screen_name:string \
     reply_count:integer \
     retweet_count:integer \
     favorite_count:integer \
     favorited:boolean \
     retweeted:boolean \
-    user:User
+    in_reply_to_status_id:integer \
+    in_reply_to_user_id:integer \
+    in_reply_to_screen_name:string \
+    created_at:string \
+    user_id:references:users
+```
+
+```bash
+mix ecto.migrate
 ```
