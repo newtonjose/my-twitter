@@ -1,4 +1,4 @@
-defmodule MyTwitter.Account.User do
+defmodule MyTwitter.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -42,13 +42,16 @@ defmodule MyTwitter.Account.User do
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))
     |> validate_length(:password, min: 6, max: 100)
-    |> unique_constraint(:users, name: :users_email_screen_name_index)
+    |> unique_constraint(:email)
+    |> unique_constraint(:screen_name)
     |> hash_password
   end
 
   defp hash_password(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
-    change(changeset, Bcrypt.add_hash(password))
+    change(changeset, Comeonin.Argon2.add_hash(password))
   end
 
-  defp hash_password(changeset), do: changeset
+  defp hash_password(changeset) do
+    changeset
+  end
 end

@@ -1,6 +1,8 @@
 defmodule MyTwitterWeb.Schema.UserType do
   use Absinthe.Schema.Notation
 
+  alias MyTwitterWeb.Resolvers
+
   object :user_type do
     field :id, :id
     field :created_at, :string
@@ -17,7 +19,6 @@ defmodule MyTwitterWeb.Schema.UserType do
   input_object :user_input_type do
     field :created_at, non_null(:string)
     field :email, non_null(:string)
-    field :name, non_null(:string)
     field :password, non_null(:string)
     field :screen_name, non_null(:string)
   end
@@ -27,24 +28,28 @@ defmodule MyTwitterWeb.Schema.UserType do
     field :search_user, list_of(:user_type) do
       arg(:search_term, non_null(:string))
 
-      resolve(&Resolvers.UserResolver.search_users/3)
+      resolve(&Resolvers.UserResolver.search_user/3)
+    end
+
+    @desc "Get current user session"
+    field :user_session, :session_type do
+      resolve(&Resolvers.UserResolver.user_session/3)
     end
   end
 
   object :user_mutations do
-    @desc "Authenticate"
-    field :auth, :user do
-      arg(:screen_name, non_null(:string))
-      arg(:password, non_null(:string))
+    @desc "Login a user and return a jwt token"
+    field :user_auth, :session_type do
+      arg(:input, non_null(:session_input_type))
 
-      resolve(&Resolvers.UserResolver.auth/3)
+      resolve(&Resolvers.SessionResolver.user_auth/3)
     end
 
-    @desc "Sign up"
-    field :sign_up, :user_type do
+    @desc "Create a user account"
+    field :user_sign_up, :user_type do
       arg(:input, non_null(:user_input_type))
 
-      resolve(&Resolvers.UserResolver.signup/3)
+      resolve(&Resolvers.UserResolver.user_sign_up/3)
     end
   end
 end

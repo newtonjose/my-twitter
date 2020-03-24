@@ -1,12 +1,12 @@
-defmodule MyTwitter.Account do
+defmodule MyTwitter.Accounts do
   @moduledoc """
-  The Account context.
+  The Accounts context.
   """
 
   import Ecto.Query, warn: false
   alias MyTwitter.Repo
 
-  alias MyTwitter.Account.User
+  alias MyTwitter.Accounts.User
 
   @doc """
   Returns the list of users.
