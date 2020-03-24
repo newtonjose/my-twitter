@@ -17,7 +17,6 @@ mutation createUser {
       email: "email@domain.<any>",
       password:"passwd",
       screenName: "my_nickname",
-      createdAt: "2020-03-24 06:06:00 UTC-3"
     }
   ) {
     id
@@ -59,13 +58,12 @@ Authorization       |   Bearer *token*
 - User
 
 ```bash
-mix phx.gen.schema User users \
+mix phx.gen.context Accounts User users \
     name:string \
     email:strig \
     screen_name:string \
     description:string \
     location:string \
-    url:string \
     protected:boolean \
     followers_count:integer \
     favourites_count:integer \
@@ -76,7 +74,7 @@ mix phx.gen.schema User users \
 - Tweet
 
 ```bash
-mix phx.gen.schema Tweet tweets \
+mix phx.gen.context Tweets Tweet tweets \
     text:text \
     reply_count:integer \
     retweet_count:integer \

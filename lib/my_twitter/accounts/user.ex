@@ -3,7 +3,7 @@ defmodule MyTwitter.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
-    field :created_at, :string
+    field :created_at, :string, default: NaiveDateTime.to_string(NaiveDateTime.utc_now())
     field :description, :string
     field :email, :string, unique: true
     field :favourites_count, :integer, default: 0
@@ -36,7 +36,6 @@ defmodule MyTwitter.Accounts.User do
     |> validate_required([
       :email,
       :screen_name,
-      :created_at,
       :password
     ])
     |> validate_format(:email, ~r/@/)

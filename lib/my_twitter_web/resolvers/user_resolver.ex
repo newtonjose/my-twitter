@@ -6,7 +6,7 @@ defmodule MyTwitterWeb.Resolvers.UserResolver do
     {:ok, Accounts.list_users()}
   end
 
-  def user_sign_up(_, %{input: input}, _) do
-    Accounts.create_user(input)
+  def user_sign_up(_, %{object: args}, _) do
+    Accounts.create_user(args)
   end
 end
