@@ -1,13 +1,23 @@
 defmodule MyTwitter.Guardian do
   use Guardian, otp_app: :my_twitter
+  alias MyTwitter.Accounts
 
-  alias MyTwitter.User
-
-  def subject_for_token(resource, _claims) do
-    {:ok, to_string(resource.id)}
+  def subject_for_token(%Accounts.User{} = user, _claims) do
+    {:ok, to_string(user.id)}
   end
 
-  def resource_from_claims(claims) do
-    {:ok, User.find(claims["sub"])}
+  def subject_for_token(_, _) do
+    {:error, :reason_for_error}
+  end
+
+  def resource_from_claims(%{"sub" => id}) do
+    case Accounts.get_user!(id) do
+      nil -> {:error, :resource_not_found}
+      user -> {:ok, user}
+    end
+  end
+
+  def resource_from_claims(_claims) do
+    {:error, :reason_for_error}
   end
 end
