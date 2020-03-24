@@ -3,9 +3,9 @@ defmodule MyTwitter.Tweets do
   The Tweets context.
   """
 
-  import Ecto.Query, warn: false
-  alias MyTwitter.Repo
+  import Ecto.Query, only: [from: 2]
 
+  alias MyTwitter.Repo
   alias MyTwitter.Tweets.Tweet
 
   @doc """
@@ -18,7 +18,16 @@ defmodule MyTwitter.Tweets do
 
   """
   def list_tweets do
-    Repo.all(Tweet)
+    Repo.all()
+  end
+
+  def list_tweets_by_user(id) do
+    query =
+      from u in "users",
+        where: u.user_id == ^id,
+        select: u.id
+
+    Repo.all(query)
   end
 
   @doc """

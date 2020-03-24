@@ -2,11 +2,11 @@ defmodule MyTwitterWeb.Router do
   use MyTwitterWeb, :router
 
   pipeline :api do
-    plug(:accepts, ["json"])
     plug(MyTwitterWeb.Plugs.Context)
+    plug(:accepts, ["json"])
   end
 
-  scope "/api" do
+  scope "/" do
     pipe_through(:api)
 
     forward("/api/graphql", Absinthe.Plug, schema: MyTwitterWeb.Schema)

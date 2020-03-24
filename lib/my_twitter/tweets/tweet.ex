@@ -36,7 +36,8 @@ defmodule MyTwitter.Tweets.Tweet do
       :created_at
     ])
     |> validate_required([
-      :text
+      :text,
+      :user_id
     ])
     |> validate_length(:text, max: 140)
   end

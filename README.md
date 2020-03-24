@@ -51,6 +51,22 @@ __Header Name__     |   __Header Value__
 Authorization       |   Bearer *token*
 
 
+```javascript
+mutation {
+  createTweet(object: {
+    text: "Fist tweet create after one week"
+  }) {
+    id
+    text
+    createdAt
+    favorited
+    retweeted
+    user {
+      id
+    }
+  }
+}
+```
 // queries, mutations: create, update, delete
 
 ## DB Schemas (docs)
