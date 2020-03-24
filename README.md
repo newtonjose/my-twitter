@@ -7,6 +7,51 @@ A simple GraphQL API implementing the objects
 // Setup using docker-compose to get backend and front
 
 ## GraphQL Exemples
+
+- To use the API,
+> Fiist create a user
+```javascript
+mutation createUser {
+  userSignUp(
+    object: {
+      email: "email@domain.<any>",
+      password:"passwd",
+      screenName: "my_nickname",
+      createdAt: "2020-03-24 06:06:00 UTC-3"
+    }
+  ) {
+    id
+  }
+}
+```
+
+> Authenticate to get JWT token
+```javascript
+mutation authenticateUser {
+  userAuth(
+    object: {
+      email: "email@domain.<any>",
+      password:"passwd"
+    }
+  ) {
+    user{
+      id
+      name
+      description
+      screenName
+    }
+    token
+  }
+}
+```
+
+> Ccpy the `token` and add on Headers
+
+__Header Name__     |   __Header Value__
+--------------------|----------------------
+Authorization       |   Bearer *token*
+
+
 // queries, mutations: create, update, delete
 
 ## DB Schemas (docs)
