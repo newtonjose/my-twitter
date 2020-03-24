@@ -3,32 +3,28 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
-
-# General application configuration
 use Mix.Config
 
+# General application configuration
 config :my_twitter,
   ecto_repos: [MyTwitter.Repo]
 
 # Configures the endpoint
 config :my_twitter, MyTwitterWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "WFd2BwQZyj2hO7dt7yFHYunWitbwQEP28rG5/mqJ50bafE40+LQk/oqKXxHgdzD5",
+  secret_key_base: "ZLKztK4dA8Fh8tfzv0yAdmvRMu9ntIJ/C4AkXCjrrBMoyGO/I+h8tdmr7VXFHRr0",
   render_errors: [view: MyTwitterWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: MyTwitter.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "PaGUNkHI"]
+  pubsub: [name: MyTwitter.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: [:user_id]
 
+# Guardian config details
 config :my_twitter, MyTwitter.Guardian,
   issuer: "my_twitter",
-  secret_key: "3TrEVHPaCT1PIToFKDBh4Lh4jLwwM75BjpwjueKQw66CtaHVhpqC0pS0U9gmpk5Z"
-
-# Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
+  secret_key: "33R7tkfScRCGnJVFsB7eb+UE9PuFVvNRrJqmqGUwNCRui/fK+K28p/sEqlupH3Sg"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
